@@ -110,15 +110,15 @@ FROM employees_tracking.employees_table;
 
 
 --9
-select COUNT(employee_id) as male_employees
+SELECT COUNT(employee_id) as male_employees
 FROM employees_tracking.employees_table
-where gender = 'male';
+WHERE gender = 'male';
 
 
 --10
-select COUNT(employee_id) as female_employees
+SELECT COUNT(employee_id) as female_employees
 FROM employees_tracking.employees_table
-where gender = 'female';
+WHERE gender = 'female';
 
 
 --11
@@ -132,19 +132,19 @@ GROUP BY(date_of_hire);
 --12
 SELECT AVG(salary) as average_salary_in_IT
 FROM employees_tracking.employees_table
-where department = 'IT';
+WHERE department = 'IT';
 
 
 --13
-select department, COUNT(employee_id) as total_employees
+SELECT department, COUNT(employee_id) as total_employees
 FROM employees_tracking.employees_table
-group by department;
+GROUP BY department;
 
 
 --14
-select department , SUM(salary) as total_salary
+SELECT department , SUM(salary) as total_salary
 FROM employees_tracking.employees_table
-group by department;
+GROUP BY department;
 
 
 --15
@@ -159,8 +159,13 @@ FROM employees_tracking.employees_table
 GROUP BY department;
 
 
---18
+--17
 SELECT gender, COUNT(employee_id) AS count_of_employees_gender_based
+FROM employees_tracking.employees_table
+GROUP BY gender;
+
+--18
+SELECT gender, AVG(price) AS count_of_employees_gender_based
 FROM employees_tracking.employees_table
 GROUP BY gender;
 
@@ -213,13 +218,30 @@ LIMIT 1;
 
 
 --26
+SELECT e_table.department, AVG(quantity)
+FROM employees_tracking.employees_table e_table
+    JOIN employees_tracking.sales_table s_table ON s_table.employee_id = e_table.employee_id
+GROUP BY
+    department;
 
 --27
+SELECT s_table.employee_id, s_table.sale_date
+FROM employees_tracking.sales_table s_table
+WHERE sale_date BETWEEN '2020-12-31' AND '2022-1-1';
+
 
 --28
+SELECT s_table.employee_id, SUM(s_table.quantity) AS total_quantity
+FROM employees_tracking.sales_table s_table
+GROUP BY s_table.employee_id
+ORDER BY total_quantity DESC
+LIMIT 3;
 
---29
 
---30
+
+
+
+
+
 
 
