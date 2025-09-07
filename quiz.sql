@@ -197,10 +197,11 @@ LIMIT 10;
 
 
 --23
-SELECT first_name, COUNT(sales_id) AS total_sales
-FROM employees_table 
-JOIN sales_table ON employee_id = employee_id
-GROUP BY employee_id ,first_name;
+SSELECT e.first_name, COUNT(s.sale_id) AS total_sales
+FROM employees_tracking.employees_table e
+LEFT JOIN employees_tracking.sales_table s ON e.employee_id = s.employee_id
+GROUP BY e.employee_id, e.first_name;
+
 
 --24
 SELECT employee_id,COUNT(sale_id) AS total_sales
@@ -238,8 +239,17 @@ ORDER BY total_quantity DESC
 LIMIT 3;
 
 
+--29
+SELECT e.department, SUM(s.quantity) AS total_quantity
+FROM employees_tracking.employees_table e
+JOIN employees_tracking.sales_table s ON e.employee_id = s.employee_id
+GROUP BY e.department;
 
-
+-- 30
+SELECT p.category, SUM(s.total) AS total_revenue
+FROM employees_tracking.sales_table s
+JOIN employees_tracking.products_table p ON s.product_id = p.product_id
+GROUP BY p.category;
 
 
 
